@@ -8,3 +8,6 @@ class GestionDeStockApplicationTests {
 
     @Test
     void contextLoads() {
+    }
+
+}
