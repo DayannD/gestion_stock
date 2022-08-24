@@ -1,2 +1,5 @@
-package com.deshayes.gestiondestock.model;public enum TypeMvtStk {
+package com.deshayes.gestiondestock.model;
+
+public enum TypeMvtStk {
+    ENTRE, SORTIE
 }
