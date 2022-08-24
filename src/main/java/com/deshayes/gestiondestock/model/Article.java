@@ -1,12 +1,13 @@
 package com.deshayes.gestiondestock.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -31,7 +32,6 @@ public class Article extends AbstractEntity{
 
     @Column(name = "photo")
     private String photo;
-
     @ManyToOne
     @JoinColumn(name = "idcategory")
     private Category category;
