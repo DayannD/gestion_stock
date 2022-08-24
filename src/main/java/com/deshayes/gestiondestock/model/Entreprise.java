@@ -1,6 +1,7 @@
 package com.deshayes.gestiondestock.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -8,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

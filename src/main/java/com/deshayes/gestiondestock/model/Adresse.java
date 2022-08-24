@@ -1,19 +1,21 @@
 package com.deshayes.gestiondestock.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @Embeddable
-public class Adresse extends AbstractEntity{
+public class Adresse implements Serializable {
 
     @Column(name = "adresse1")
     private String adresse1;
@@ -25,7 +27,7 @@ public class Adresse extends AbstractEntity{
     private String ville;
 
     @Column(name = "codePostale")
-    private String coddePostale;
+    private String codePostale;
 
     @Column(name = "pays")
     private String pays;
