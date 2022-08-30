@@ -31,7 +31,7 @@ public class ArticleDto {
     private Category category;
 
 
-    public ArticleDto fromEntity(Article article){
+    public static ArticleDto fromEntity(Article article){
         if (article == null)
             return null;
 
@@ -47,7 +47,7 @@ public class ArticleDto {
                 .build();
     }
 
-    public Article toEntity(ArticleDto articleDto){
+    public static Article toEntity(ArticleDto articleDto){
         if (articleDto == null)
             return null;
 

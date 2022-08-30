@@ -3,6 +3,7 @@ package com.deshayes.gestiondestock.exception;
 public enum ErrorCodes {
 
     ARTICLES_NOT_FOUND(1000),
+    ARTICLES_NOT_VALID(1000),
     CATEGORY_NOT_FOUND(2000),
     CLIENT_NOT_FOUND(3000),
     COMMANDE_CLIENT__NOT_FOUND(4000),
