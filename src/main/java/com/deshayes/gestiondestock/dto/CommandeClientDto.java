@@ -26,10 +26,9 @@ public class CommandeClientDto {
 
     private Client client;
 
-    @JsonIgnore
     private List<LigneCommandeClient> ligneCommandeClients;
 
-    public CommandeClientDto fromEntity(CommandeClient commandeClient){
+    public static CommandeClientDto fromEntity(CommandeClient commandeClient){
         if(commandeClient == null)
             return null;
 
@@ -41,7 +40,7 @@ public class CommandeClientDto {
                 .build();
     }
 
-    public CommandeClient toEntity(CommandeClientDto commandeClientDto){
+    public static CommandeClient toEntity(CommandeClientDto commandeClientDto){
         if(commandeClientDto == null)
             return null;
 
