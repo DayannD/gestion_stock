@@ -17,10 +17,12 @@ import com.deshayes.gestiondestock.service.Iservice.ICommandeClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -71,31 +73,61 @@ public class CommandeClientService implements ICommandeClientService {
         CommandeClient savedCmdClt = cmdClientRepo.save(CommandeClientDto.toEntity(dto));
 
         dto.getLigneCommandeClients().forEach(ligneCmdClient -> {
-            ligneCmdClient = LigneCommandeClientDto.toEntity(ligneCmdClient);
-            ligneCmdClient.setCommandeClient(savedCmdClt);
-            ligneCmdClientRepo.save()
+            LigneCommandeClient ligneCommandeClient = LigneCommandeClientDto.toEntity(LigneCommandeClientDto.fromEntity(ligneCmdClient));
+            ligneCommandeClient.setCommandeClient(savedCmdClt);
+            ligneCmdClientRepo.save(ligneCommandeClient);
                 }
         );
-
+        return CommandeClientDto.fromEntity(savedCmdClt);
     }
 
     @Override
     public CommandeClientDto findById(Integer id) {
-        return null;
+        if (id == null){
+            log.error("l'ID est null");
+            return null;
+        }
+
+        Optional<CommandeClient> cmdClient = cmdClientRepo.findById(id);
+        CommandeClientDto dto = CommandeClientDto.fromEntity(cmdClient.get());
+
+        return Optional.of(dto).orElseThrow(() ->
+                new EntityNotFoundException("Aucune commande client n'a était trouver avec l'ID " + id,
+                        ErrorCodes.COMMANDE_CLIENT_NOT_FOUND
+                ));
     }
 
     @Override
     public CommandeClientDto findByCode(String code) {
-        return null;
+        if (!StringUtils.hasText(code)){
+            log.error("le code est null");
+            return null;
+        }
+
+        Optional<CommandeClient> cmdClient = cmdClientRepo.findCommandeClientByCode(code);
+        CommandeClientDto dto = CommandeClientDto.fromEntity(cmdClient.get());
+
+        return Optional.of(dto).orElseThrow(() ->
+                new EntityNotFoundException("Aucune commande client n'a était trouver avec le code " + code,
+                        ErrorCodes.COMMANDE_CLIENT_NOT_FOUND
+                ));
+
     }
 
     @Override
     public List<CommandeClientDto> findAll() {
-        return null;
+        return cmdClientRepo.findAll().stream()
+                .map(CommandeClientDto::fromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public void delete(Integer id) {
+        if (id == null){
+            log.error("l'id est null");
+            return;
+        }
 
+        cmdClientRepo.deleteById(id);
     }
 }

@@ -19,11 +19,8 @@ import java.util.List;
 public class CommandeClientDto {
 
     private Integer id;
-
     private String code;
-
     private Instant date;
-
     private Client client;
 
     private List<LigneCommandeClient> ligneCommandeClients;
